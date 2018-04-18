@@ -1,4 +1,8 @@
+# Base image
 FROM centos
+
+# Canonical name for server certificate
+ARG hostname=yourserver.com
 
 # Expose VPN ports
 EXPOSE 1194/udp
@@ -12,7 +16,7 @@ RUN yum install -y ansible
 
 # Provision container
 COPY ansible/ /ansible/
-RUN ansible-playbook /ansible/playbook.yml
+RUN ansible-playbook /ansible/playbook.yml -e "hostname=$hostname"
 
 # Start container
 CMD /start

@@ -25,7 +25,7 @@
       creates: /pki/dh2048.pem
 
   - name: Generate CA certificate
-    command: openssl req -days 3650 -new -x509 -key /pki/ca.key -out /pki/ca.crt -sha256 -subj ""
+    command: openssl req -days 3650 -new -x509 -key /pki/ca.key -out /pki/ca.crt -sha256 -subj "/CN=CA Certificate"
     args:
       creates: /pki/ca.crt
 
@@ -35,7 +35,7 @@
       creates: /pki/server.key
 
   - name: Generate server certificate signing request
-    command: openssl req -new -key /pki/server.key -out /pki/server.csr -subj ""
+    command: openssl req -new -key /pki/server.key -out /pki/server.csr -subj "/CN={{ hostname }}"
     args:
       creates: /pki/server.csr
 
@@ -50,7 +50,7 @@
       creates: /pki/client.key
 
   - name: Generate client certificate signing request
-    command: openssl req -new -key /pki/client.key -out /pki/client.csr -subj ""
+    command: openssl req -new -key /pki/client.key -out /pki/client.csr -subj "/CN=Client certificate"
     args:
       creates: /pki/client.csr
 
