@@ -10,6 +10,7 @@ EXPOSE 1194/udp
 # Enable EPEL repo
 RUN yum update -y
 RUN yum install -y epel-release
+RUN yum update -y
 
 # Install provisioner
 RUN yum install -y ansible
