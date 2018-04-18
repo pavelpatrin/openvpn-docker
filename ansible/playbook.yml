@@ -6,9 +6,9 @@
     EASYRSA_PKI: /pki
     EASYRSA_BATCH: yes
   tasks:
-  - name: Install latest version of Easy RSA library
+  - name: Install latest version of OpenVPN
     yum:
-      name: easyrsa
+      name: openvpn
       state: latest
       
   - name: Initialize PKI
@@ -33,11 +33,6 @@
     command: easyrsa build-client-full client nopass
     args:
       creates: /pki/issued/client.key
-
-  - name: Install latest version of OpenVPN server
-    yum:
-      name: openvpn
-      state: latest
 
   - name: Render OpenVPN server config
     template:
