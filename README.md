@@ -2,7 +2,7 @@
 
 ## Build docker image
 ```sh
-docker build .
+docker build . -t openvpn
 ```
 
 ## Start container on 0.0.0.0:1194
