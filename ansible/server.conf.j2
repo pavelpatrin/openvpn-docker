@@ -1,57 +1,57 @@
-# Конфигурационный файл OpenVPN сервера.
-# См. https://community.openvpn.net/openvpn/wiki/Openvpn24ManPage.
+# OpenVPN client configuration file
+# See https://community.openvpn.net/openvpn/wiki/Openvpn24ManPage
 
-# IP-адрес сервера и маска сети внутри VPN.
+# Server IP-address and netmask inside VPN
 server 10.198.199.0 255.255.255.0
 
-# Ненадежный быстрый транспортный протокол.
+# Protocol for communicating with remote host
 proto udp
 
-# Публичный порт сервиса внутри контейнера.
+# Listening server port inside container
 port 1194
 
-# Режим туннелирования 3-го уровня.
+# Protocol for communicating with remote host
 dev tun
 
-# Надежный симметричный шифр канала.
+# Encrypt data channel packets with this cipher
 cipher AES-128-CBC
 
-# Отключение согласования шифров между клиентом и сервером.
-# Необходимо для принудительного выбора AES-128-CBC.
+# Disable "negotiable crypto parameters"
+# This guarantees to use configured cipher
 ncp-disable
 
-# Разрешение соединения нескольких клиентов с одним сертификатом.
+Allow multiple clients with the same common name to concurrently connect
 duplicate-cn
 
-# Опрос раз в 10 секунд с USR1-перезагрузкой при таймауте в 60 секунд.
+# Keepalive connection every X seconds with Y timeout
 keepalive 10 60
 
-# Отключение перечитывания файлов ключей при перезагрузке по USR1.
+# Don't re-read key files across SIGUSR1 or --ping-restart
 persist-key
 
-# Отключение перезапуска сетевого устройства при перезагрузке по USR1.
+# Don't re-open TUN/TAP device across SIGUSR1 or --ping-restart restarts
 persist-tun
 
-# Сжатие передаваемых данных быстрым алгоритмом LZ4.
+# Enable a compression algorithm
 compress LZ4
 
-# Рекомендованный документацией уровень логинования.
+# Set output verbosity to n
 verb 3
 
-# Перенаправление всего трафика клиентов в туннель.
+# Route all client traffic via VPN
 push "redirect-gateway def1 bypass-dhcp"
 
-# Использование Google DNS клиентами.
+# Setup Google DNS for clients
 push "dhcp-option DNS 8.8.8.8"
 
-# Сертификат центра сертификации.
+# Set CA certificate
 ca /pki/ca.crt
 
-# Набор параметров DH.
+# Set DH parameters
 dh /pki/dh.pem
 
-# Сертификат OpenVPN-сервера.
+# Set server certificate
 cert /pki/issued/{{ server }}.crt
 
-# Ключ сертификата OpenVPN-сервера.
+# Set server secret key
 key /pki/private/{{ server }}.key
