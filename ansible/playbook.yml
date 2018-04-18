@@ -5,7 +5,7 @@
     EASYRSA_PKI: /pki
     EASYRSA_BATCH: yes
   tasks:
-  - name: Install latest version of Easy RSA library
+  - name: Install latest version of EasyRSA library
     yum:
       name: easy-rsa
       state: latest
