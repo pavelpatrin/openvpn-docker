@@ -1,63 +1,38 @@
 - name: OpenVPN complete installation
   hosts: localhost
   connection: local
-
+  environment:
+    PATH: $PATH:/usr/share/easy-rsa/3/
+    EASYRSA_PKI: /pki
+    EASYRSA_BATCH: yes
   tasks:
-
-  - name: Install latest version of OpenSSL library
+  - name: Install latest version of Easy RSA library
     yum:
-      name: openssl
+      name: easyrsa
       state: latest
-
-  - name: Create PKI directory
-    file:
-      path: /pki
-      state: directory
-
-  - name: Generate CA certificate key
-    command: openssl genrsa -out /pki/ca.key 4096
+      
+  - name: Initialize PKI
+    command: easyrsa init-pki
+    
+  - name: Generate DH parameters
+    command: easyrsa gen-dh
     args:
-      creates: /pki/ca.key
+      creates: /pki/dh.pem
 
-  - name: Generate DH params
-    command: openssl dhparam -out /pki/dh2048.pem 2048
-    args:
-      creates: /pki/dh2048.pem
-
-  - name: Generate CA certificate
-    command: openssl req -days 3650 -new -x509 -key /pki/ca.key -out /pki/ca.crt -sha256 -subj "/CN=CA Certificate"
+  - name: Generate CA certificate and key
+    command: easyrsa --req-cn="OpenVPN CA" build-ca nopass
     args:
       creates: /pki/ca.crt
 
-  - name: Generate server certificate key
-    command: openssl genrsa -out /pki/server.key 4096
+  - name: Generate server certificate and key
+    command: easyrsa build-server-full {{ server }} nopass
     args:
-      creates: /pki/server.key
+      creates: /pki/issued/{{ server }}.crt
 
-  - name: Generate server certificate signing request
-    command: openssl req -new -key /pki/server.key -out /pki/server.csr -subj "/CN={{ hostname }}"
+  - name: Generate client certificate and key
+    command: easyrsa build-client-full client nopass
     args:
-      creates: /pki/server.csr
-
-  - name: Generate server certificate
-    command: openssl x509 -req -days 3650 -in /pki/server.csr -CA /pki/ca.crt -CAkey /pki/ca.key -CAcreateserial -sha256 -out /pki/server.crt
-    args:
-      creates: /pki/server.crt
-
-  - name: Generate client certificate key
-    command: openssl genrsa -out /pki/client.key 4096
-    args:
-      creates: /pki/client.key
-
-  - name: Generate client certificate signing request
-    command: openssl req -new -key /pki/client.key -out /pki/client.csr -subj "/CN=Client certificate"
-    args:
-      creates: /pki/client.csr
-
-  - name: Generate client certificate
-    command: openssl x509 -req -days 3650 -in /pki/client.csr -CA /pki/ca.crt -CAkey /pki/ca.key -CAcreateserial -sha256 -out /pki/client.crt
-    args:
-      creates: /pki/client.crt
+      creates: /pki/issued/client.key
 
   - name: Install latest version of OpenVPN server
     yum:
