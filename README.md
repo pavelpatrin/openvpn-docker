@@ -1,6 +1,6 @@
 # Minimal docker image for OpenVPN startup
 
-## Build docker image
+## Build docker image for your server
 ```sh
 docker build . -t openvpn --build-arg hostname=yourserver.com
 ```
