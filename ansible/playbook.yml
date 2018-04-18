@@ -11,25 +11,25 @@
       state: latest
       
   - name: Initialize PKI
-    command: easyrsa init-pki
+    command: /usr/share/easy-rsa/3/easyrsa init-pki
     
   - name: Generate DH parameters
-    command: easyrsa gen-dh
+    command: /usr/share/easy-rsa/3/easyrsa gen-dh
     args:
       creates: /pki/dh.pem
 
   - name: Generate CA certificate and key
-    command: easyrsa --req-cn="OpenVPN CA" build-ca nopass
+    command: /usr/share/easy-rsa/3/easyrsa --req-cn="OpenVPN CA" build-ca nopass
     args:
       creates: /pki/ca.crt
 
   - name: Generate server certificate and key
-    command: easyrsa build-server-full {{ server }} nopass
+    command: /usr/share/easy-rsa/3/easyrsa build-server-full {{ server }} nopass
     args:
       creates: /pki/issued/{{ server }}.crt
 
   - name: Generate client certificate and key
-    command: easyrsa build-client-full client nopass
+    command: /usr/share/easy-rsa/3/easyrsa build-client-full client nopass
     args:
       creates: /pki/issued/client.key
       
