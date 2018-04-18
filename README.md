@@ -2,7 +2,7 @@
 
 ## Build docker image for your server
 ```sh
-docker build . -t openvpn --build-arg hostname=yourserver.com
+docker build . -t openvpn --build-arg server=yourserver.com
 ```
 
 ## Start container on 0.0.0.0:1194
