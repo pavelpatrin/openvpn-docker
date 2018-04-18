@@ -2,7 +2,6 @@
   hosts: localhost
   connection: local
   environment:
-    PATH: $PATH:/usr/share/easy-rsa/3/
     EASYRSA_PKI: /pki
     EASYRSA_BATCH: yes
   tasks:
