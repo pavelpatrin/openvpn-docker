@@ -19,13 +19,6 @@ dev tun
 # Encrypt data channel packets with this cipher
 cipher AES-128-CBC
 
-# Disable "negotiable crypto parameters"
-# This guarantees to use configured cipher
-ncp-disable
-
-# Keepalive connection every X seconds with Y timeout
-keepalive 10 60
-
 # Don't re-read key files across SIGUSR1 or --ping-restart
 persist-key
 
