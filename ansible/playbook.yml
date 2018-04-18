@@ -1,0 +1,85 @@
+- name: OpenVPN complete installation
+  hosts: localhost
+  connection: local
+
+  tasks:
+
+  - name: Install latest version of OpenSSL library
+    yum:
+      name: openssl
+      state: latest
+
+  - name: Create PKI directory
+    file:
+      path: /pki
+      state: directory
+
+  - name: Generate CA certificate key
+    command: openssl genrsa -out /pki/ca.key 4096
+    args:
+      creates: /pki/ca.key
+
+  - name: Generate DH params
+    command: openssl dhparam -out /pki/dh2048.pem 2048
+    args:
+      creates: /pki/dh2048.pem
+
+  - name: Generate CA certificate
+    command: openssl req -days 3650 -new -x509 -key /pki/ca.key -out /pki/ca.crt -sha256 -subj ""
+    args:
+      creates: /pki/ca.crt
+
+  - name: Generate server certificate key
+    command: openssl genrsa -out /pki/server.key 4096
+    args:
+      creates: /pki/server.key
+
+  - name: Generate server certificate signing request
+    command: openssl req -new -key /pki/server.key -out /pki/server.csr -subj ""
+    args:
+      creates: /pki/server.csr
+
+  - name: Generate server certificate
+    command: openssl x509 -req -days 3650 -in /pki/server.csr -CA /pki/ca.crt -CAkey /pki/ca.key -CAcreateserial -sha256 -out /pki/server.crt
+    args:
+      creates: /pki/server.crt
+
+  - name: Generate client certificate key
+    command: openssl genrsa -out /pki/client.key 4096
+    args:
+      creates: /pki/client.key
+
+  - name: Generate client certificate signing request
+    command: openssl req -new -key /pki/client.key -out /pki/client.csr -subj ""
+    args:
+      creates: /pki/client.csr
+
+  - name: Generate client certificate
+    command: openssl x509 -req -days 3650 -in /pki/client.csr -CA /pki/ca.crt -CAkey /pki/ca.key -CAcreateserial -sha256 -out /pki/client.crt
+    args:
+      creates: /pki/client.crt
+
+  - name: Install latest version of OpenVPN server
+    yum:
+      name: openvpn
+      state: latest
+
+  - name: Render OpenVPN server config
+    template:
+      src: /ansible/server.conf.j2
+      dest: /etc/openvpn/server.conf
+
+  - name: Render OpenVPN client config
+    template:
+      src: /ansible/client.conf.j2
+      dest: /etc/openvpn/client.conf
+
+  - name: Render start script
+    template:
+      src: /ansible/start.j2
+      dest: /start
+
+  - name: Bless start script
+    file:
+      dest: /start
+      mode: a+x

@@ -1,0 +1,25 @@
+remote pavelpatrin.com 1194
+nobind
+client
+dev tun
+proto udp
+cipher AES-128-CBC
+persist-key
+persist-tun
+comp-lzo
+verb 3
+
+# CA certificate
+<ca>
+{{ lookup('file', '/pki/ca.crt') }}
+</ca>
+
+# Client certificate
+<cert>
+{{ lookup('file', '/pki/client.crt') }}
+</cert>
+
+# Client secret key
+<key>
+{{ lookup('file', '/pki/client.key') }}
+</key>
