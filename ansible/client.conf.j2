@@ -16,10 +16,10 @@ verb 3
 
 # Client certificate
 <cert>
-{{ lookup('file', '/pki/client.crt') }}
+{{ lookup('file', '/pki/issued/client.crt') }}
 </cert>
 
 # Client secret key
 <key>
-{{ lookup('file', '/pki/client.key') }}
+{{ lookup('file', '/pki/private/client.key') }}
 </key>
