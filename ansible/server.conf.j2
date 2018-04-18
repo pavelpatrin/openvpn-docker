@@ -14,6 +14,6 @@ push "redirect-gateway def1 bypass-dhcp"
 push "dhcp-option DNS 8.8.8.8"
 
 ca /pki/ca.crt
-cert /pki/server.crt
-key /pki/server.key
-dh /pki/dh2048.pem
+dh /pki/dh.pem
+cert /pki/issued/{{ server }}.crt
+key /pki/private/{{ server }}.key
