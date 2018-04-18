@@ -1,4 +1,4 @@
-- name: OpenVPN complete installation
+- name: OpenVPN setup
   hosts: localhost
   connection: local
   environment:
