@@ -1,26 +1,54 @@
-remote {{ server }} 1194
-nobind
+# OpenVPN client configuration file
+# See https://community.openvpn.net/openvpn/wiki/Openvpn24ManPage
+
+# OpenVPN client configuration
 client
-dev tun
+
+# Server host name or IP address
+remote {{ server }} 1194
+
+# Do not bind to local address and port
+nobind
+
+# Protocol for communicating with remote host
 proto udp
 
+# TUN/TAP virtual network device
+dev tun
+
+# Encrypt data channel packets with this cipher
 cipher AES-128-CBC
+
+# Disable "negotiable crypto parameters"
+# This guarantees to use configured cipher
+ncp-disable
+
+# Keepalive connection every X seconds with Y timeout
+keepalive 10 60
+
+# Don't re-read key files across SIGUSR1 or --ping-restart
 persist-key
+
+# Don't re-open TUN/TAP device across SIGUSR1 or --ping-restart restarts
 persist-tun
-comp-lzo
+
+# Enable a compression algorithm
+compress LZ4
+
+# Set output verbosity to n
 verb 3
 
-# CA certificate
+# Set CA certificate
 <ca>
 {{ lookup('file', '/pki/ca.crt') }}
 </ca>
 
-# Client certificate
+# Set client certificate
 <cert>
 {{ lookup('file', '/pki/issued/client.crt') }}
 </cert>
 
-# Client secret key
+# Set client secret key
 <key>
 {{ lookup('file', '/pki/private/client.key') }}
 </key>
