@@ -1,5 +1,10 @@
 # Minimal docker image for OpenVPN startup
 
+## Clone this repository
+```sh
+git clone https://github.com/pavelpatrin/openvpn-docker-minimal.git
+```
+
 ## Build docker image for your server
 ```sh
 docker build . -t openvpn --build-arg server=yourserver.com
