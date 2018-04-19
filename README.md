@@ -1,5 +1,8 @@
 # Minimal docker image for OpenVPN startup
 
+## Prerequirements
+GIT, Docker
+
 ## Clone this repository
 ```sh
 root@host# git clone https://github.com/pavelpatrin/openvpn-docker-minimal.git
