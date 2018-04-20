@@ -8,7 +8,7 @@ server 10.198.199.0 255.255.255.0
 proto udp
 
 # Listening server port inside container
-port 1194
+port {{ server_port }}
 
 # Protocol for communicating with remote host
 dev tun
