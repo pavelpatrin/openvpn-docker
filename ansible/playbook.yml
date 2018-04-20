@@ -12,6 +12,8 @@
       
   - name: Initialize PKI
     command: /usr/share/easy-rsa/3/easyrsa init-pki
+    args:
+      creates: /pki/private
     
   - name: Generate DH parameters
     command: /usr/share/easy-rsa/3/easyrsa gen-dh
