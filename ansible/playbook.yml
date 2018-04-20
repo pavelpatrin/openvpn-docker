@@ -9,12 +9,12 @@
     yum:
       name: easy-rsa
       state: latest
-      
+
   - name: Initialize PKI
     command: /usr/share/easy-rsa/3/easyrsa init-pki
     args:
       creates: /pki/private
-    
+
   - name: Generate DH parameters
     command: /usr/share/easy-rsa/3/easyrsa gen-dh
     args:
@@ -34,7 +34,7 @@
     command: /usr/share/easy-rsa/3/easyrsa build-client-full client nopass
     args:
       creates: /pki/issued/client.key
-      
+
   - name: Install latest version of OpenVPN server
     yum:
       name: openvpn
