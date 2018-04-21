@@ -51,7 +51,7 @@ ca /pki/ca.crt
 dh /pki/dh.pem
 
 # Set server certificate
-cert /pki/issued/{{ server }}.crt
+cert /pki/issued/{{ server_host }}.crt
 
 # Set server secret key
-key /pki/private/{{ server }}.key
+key /pki/private/{{ server_host }}.key
