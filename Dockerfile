@@ -5,7 +5,6 @@ FROM centos
 ARG server_host=yourserver.com
 ARG server_port=1194
 ARG server_proto=udp
-ARG server_net=10.100.200.0
 
 # OpenVPN client parameters
 ARG client_name=default
@@ -25,4 +24,4 @@ COPY pki/ /pki/
 RUN ansible-playbook /ansible/playbook.yml -e "server_host=$server_host server_port=$server_port server_proto=$server_proto client_name=$client_name"
 
 # Start container
-CMD openvpn --config /etc/openvpn/server.conf
+CMD /start
