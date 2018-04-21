@@ -15,6 +15,7 @@ root@host# docker build . -t openvpn \
     --build-arg server_host=yourserver.com \
     --build-arg server_port=1194 \
     --build-arg server_proto=udp \
+    --build-arg server_net=10.100.200.0 \
     --build-arg client_name=client
 ```
 
@@ -25,7 +26,7 @@ root@host# docker run -t -i -d --privileged --network host --name openvpn openvp
 
 ## Setup NAT for vpn traffic
 ```sh
-root@host# iptables -t nat -A POSTROUTING -s 10.198.199.0/24 -o eth0 -j MASQUERADE
+root@host# iptables -t nat -A POSTROUTING -s 10.100.200.0/24 -o eth0 -j MASQUERADE
 ```
 
 ## Get OpenVPN client config file
