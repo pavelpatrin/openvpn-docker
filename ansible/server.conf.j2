@@ -2,7 +2,7 @@
 # See https://community.openvpn.net/openvpn/wiki/Openvpn24ManPage
 
 # Server IP-address and netmask inside VPN
-server 10.198.199.0 255.255.255.0
+server {{ server_net }} 255.255.255.0
 
 # Listening server port inside container
 port {{ server_port }}
