@@ -14,7 +14,8 @@ root@host# cd openvpn-docker-minimal
 root@host# docker build . -t openvpn \
     --build-arg server_host=yourserver.com \
     --build-arg server_port=1194 \
-    --build-arg server_proto=udp
+    --build-arg server_proto=udp \
+    --build-arg client_name=client
 ```
 
 ## Start container on 0.0.0.0:1194
