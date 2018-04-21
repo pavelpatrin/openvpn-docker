@@ -11,7 +11,10 @@ root@host# cd openvpn-docker-minimal
 
 ## Build docker image for your server
 ```sh
-root@host# docker build . -t openvpn --build-arg server_host=yourserver.com --build-arg server_port=1194 --build-arg server_proto=udp
+root@host# docker build . -t openvpn \
+    --build-arg server_host=yourserver.com \
+    --build-arg server_port=1194 \
+    --build-arg server_proto=udp
 ```
 
 ## Start container on 0.0.0.0:1194
