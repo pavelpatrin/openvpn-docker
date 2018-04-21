@@ -21,4 +21,4 @@ COPY pki/ /pki/
 RUN ansible-playbook /ansible/playbook.yml -e "server_host=$server_host server_port=$server_port server_proto=$server_proto"
 
 # Start container
-CMD /start
+CMD openvpn --config /etc/openvpn/server.conf
