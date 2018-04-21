@@ -1,12 +1,10 @@
 # Base image
 FROM centos
 
-# OpenVPN server hostname and port
+# OpenVPN server hostname, port and protocol
 ARG server_host=yourserver.com
 ARG server_port=1194
-
-# Expose VPN ports
-EXPOSE $server_port/udp
+ARG server_proto=udp
 
 # Enable EPEL repo
 RUN yum update -y
@@ -20,7 +18,7 @@ COPY ansible/ /ansible/
 COPY pki/ /pki/
 
 # Do a provision
-RUN ansible-playbook /ansible/playbook.yml -e "server_host=$server_host server_port=$server_port"
+RUN ansible-playbook /ansible/playbook.yml -e "server_host=$server_host server_port=$server_port server_proto=$server_proto"
 
 # Start container
 CMD /start
