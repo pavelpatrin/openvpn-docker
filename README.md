@@ -22,6 +22,11 @@ root@host# docker build . -t openvpn \
 root@host# docker run -t -i -d --privileged --network host --name openvpn openvpn
 ```
 
+## Setup masquedading for vpn traffic
+```sh
+root@host# iptables -t nat -A POSTROUTING -s 10.198.199.0/24 -o eth0 -j MASQUERADE
+```
+
 ## Get OpenVPN client config file
 ```sh
 root@host# docker cp CONTAINER_ID:/etc/openvpn/client.conf ./
