@@ -49,13 +49,3 @@
     template:
       src: /ansible/client.conf.j2
       dest: /etc/openvpn/client.conf
-
-  - name: Render start script
-    template:
-      src: /ansible/start.j2
-      dest: /start
-
-  - name: Bless start script
-    file:
-      dest: /start
-      mode: a+x
