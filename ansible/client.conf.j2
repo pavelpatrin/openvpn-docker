@@ -31,6 +31,9 @@ comp-lzo yes
 # Set output verbosity to n
 verb 3
 
+# Don't cache secrets in memory
+auth-nocache
+
 # Set CA certificate
 <ca>
 {{ lookup('file', '/pki/ca.crt') }}
