@@ -41,8 +41,8 @@ verb 3
 # Route all client traffic via VPN
 push "redirect-gateway def1 bypass-dhcp"
 
-# Setup Google DNS for clients
-push "dhcp-option DNS 8.8.8.8"
+# Setup OpenDNS for clients
+push "dhcp-option DNS 208.67.222.222"
 
 # Set CA certificate
 ca /pki/ca.crt
