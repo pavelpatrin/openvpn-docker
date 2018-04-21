@@ -1,10 +1,13 @@
 # Base image
 FROM centos
 
-# OpenVPN server hostname, port and protocol
+# OpenVPN server parameters
 ARG server_host=yourserver.com
 ARG server_port=1194
 ARG server_proto=udp
+
+# OpenVPN client parameters
+ARG client_name=default
 
 # Enable EPEL repo
 RUN yum update -y
