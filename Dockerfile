@@ -10,7 +10,7 @@ ARG server_proto=udp
 ARG client_name=default
 
 # Expose OpenVPN port
-EXPOSE $server_port/server_proto
+EXPOSE $server_port/$server_proto
 
 # Enable EPEL repo
 RUN yum update -y
