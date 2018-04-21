@@ -4,11 +4,11 @@
 # Server IP-address and netmask inside VPN
 server 10.198.199.0 255.255.255.0
 
-# Protocol for communicating with remote host
-proto udp
-
 # Listening server port inside container
 port {{ server_port }}
+
+# Protocol for communicating with remote host
+proto {{ server_proto }}
 
 # Protocol for communicating with remote host
 dev tun
