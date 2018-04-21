@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Setup masquedading for vpn traffic
+iptables -t nat -A POSTROUTING -s 10.198.199.0/24 -o eth0 -j MASQUERADE
+
+# Start OpenVPN process
+exec openvpn --config /etc/openvpn/server.conf
