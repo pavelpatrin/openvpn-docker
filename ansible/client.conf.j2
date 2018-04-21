@@ -11,7 +11,7 @@ remote {{ server_host }} {{ server_port }}
 nobind
 
 # Protocol for communicating with remote host
-proto udp
+proto {{ server_proto }}
 
 # TUN/TAP virtual network device
 dev tun
