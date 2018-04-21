@@ -41,10 +41,10 @@ auth-nocache
 
 # Set client certificate
 <cert>
-{{ lookup('file', '/pki/issued/client.crt') }}
+{{ lookup('file', '/pki/issued/' + client_name + '.crt') }}
 </cert>
 
 # Set client secret key
 <key>
-{{ lookup('file', '/pki/private/client.key') }}
+{{ lookup('file', '/pki/private/' + client_name + '.key') }}
 </key>
