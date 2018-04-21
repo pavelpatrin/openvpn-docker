@@ -26,9 +26,9 @@
       creates: /pki/ca.crt
 
   - name: Generate server certificate and key
-    command: /usr/share/easy-rsa/3/easyrsa build-server-full {{ server }} nopass
+    command: /usr/share/easy-rsa/3/easyrsa build-server-full {{ server_host }} nopass
     args:
-      creates: /pki/issued/{{ server }}.crt
+      creates: /pki/issued/{{ server_host }}.crt
 
   - name: Generate client certificate and key
     command: /usr/share/easy-rsa/3/easyrsa build-client-full client nopass
