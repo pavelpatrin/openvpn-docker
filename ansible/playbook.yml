@@ -31,9 +31,9 @@
       creates: /pki/issued/{{ server_host }}.crt
 
   - name: Generate client certificate and key
-    command: /usr/share/easy-rsa/3/easyrsa build-client-full client nopass
+    command: /usr/share/easy-rsa/3/easyrsa build-client-full {{client_name}} nopass
     args:
-      creates: /pki/issued/client.crt
+      creates: /pki/issued/{{ client_name }}.crt
 
   - name: Install latest version of OpenVPN server
     yum:
