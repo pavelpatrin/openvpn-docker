@@ -26,5 +26,5 @@ root@host# docker run -t -i -d --privileged --network host --name openvpn openvp
 
 ## Get OpenVPN client config file
 ```sh
-root@host# docker cp CONTAINER_ID:/etc/openvpn/client.conf ./
+root@host# docker cp openvpn:/etc/openvpn/client.conf ./
 ```
