@@ -34,6 +34,9 @@ verb 3
 # Don't cache secrets in memory
 auth-nocache
 
+# Require that peer certificate was signed with server key usage.
+remote-cert-tls server
+
 # Set CA certificate
 <ca>
 {{ lookup('file', '/pki/ca.crt') }}
