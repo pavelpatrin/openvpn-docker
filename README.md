@@ -21,7 +21,7 @@ root@host# docker build . -t openvpn \
 
 ## Start container on 0.0.0.0:1194
 ```sh
-root@host# docker run -t -i -d --privileged --publish 1194:1194/udp --name openvpn openvpn
+root@host# docker run -d --privileged --publish 1194:1194/udp --name openvpn openvpn
 ```
 
 ## Get OpenVPN client config file
