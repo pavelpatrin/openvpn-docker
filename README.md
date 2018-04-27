@@ -5,7 +5,7 @@ Linux, git, Docker
 
 ## Clone this repository
 ```sh
-root@host# git clone https://github.com/pavelpatrin/openvpn-docker-minimal.git
+root@host# git clone https://github.com/pavelpatrin/openvpn-docker.git
 root@host# cd openvpn-docker-minimal
 ```
 
